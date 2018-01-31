@@ -1,13 +1,10 @@
-import org.junit.*;
+import org.junit.Test;
+import play.test.TestBrowser;
 
-import play.mvc.*;
-import play.test.*;
-import play.libs.F.*;
-
-import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
-
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+import static play.test.Helpers.HTMLUNIT;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.inMemoryDatabase;
+import static play.test.Helpers.testServer;
 
 public class IntegrationTest {
 
