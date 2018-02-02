@@ -1,9 +1,9 @@
 import Route from '@ember/routing/route';
-import Ember from 'ember';
 import RSVP from 'rsvp';
+import {inject as service} from '@ember/service';
 
 export default Route.extend({
-	ajax: Ember.inject.service(),
+	ajax: service(),
 
 	model () {
 		return RSVP.hash({
