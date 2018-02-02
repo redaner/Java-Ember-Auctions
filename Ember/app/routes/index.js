@@ -7,7 +7,7 @@ export default Route.extend({
 
 	model () {
 		return RSVP.hash({
-			okMessage: this.get('ajax').request('/health')
+			okMessage: this.get('ajax').request('/v1/health')
 		})
 	}
 });
