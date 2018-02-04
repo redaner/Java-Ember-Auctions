@@ -1,0 +1,36 @@
+.menu-item {
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3em; 
+    color: white!important;
+    padding: 1em;   
+}
+
+.menu-item:hover {
+    border-bottom: 2px solid white;
+}
+
+.menu-items {
+    float: right!important;
+    padding: 1em;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.header-menu {
+    background-color: #332e2e;
+    font-family: "Roboto";
+}
+
+.app-title {
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.4em;
+}
+
+.app-title-container {
+    padding: 2em;
+}
+
+.active {
+    color: black!important;
+}

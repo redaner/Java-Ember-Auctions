@@ -1,0 +1,44 @@
+.row-input {
+    padding: 0.5em;
+}
+
+#email, #password, #submit {
+    border: none;
+    border: 2px;
+    border-radius: 10px;
+    height: 3em;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+}
+
+#submit {
+    background-color: #332e2e;
+    color: white;
+}
+
+#submit:hover {
+    background-color: #635959;
+}
+
+.login-container {
+    margin-top: 7em;
+}
+
+body {
+    background-color: #e9e0e0;
+}
+
+.login-title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    align-content: center!important;
+    align-items: center;
+}
+
+.login-title-inner {
+    margin: 0 auto;
+    font-size: 2em;
+    align-self: center;
+}
+
+.register-new-to-button {
+    margin-top: 2em;
+}
