@@ -2,20 +2,16 @@
     padding: 0.5em;
 }
 
-#email, #password, #submit {
-    border: none;
-    border: 2px;
-    border-radius: 10px;
-    height: 3em;
-    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+.row-input * {
+    width: 100%;
 }
 
-#submit {
+.submit-btn {
     background-color: #332e2e;
     color: white;
 }
 
-#submit:hover {
+.submit-btn:hover {
     background-color: #635959;
 }
 
@@ -41,4 +37,12 @@ body {
 
 .register-new-to-button {
     margin-top: 2em;
+}
+
+.login-input {
+    border: none;
+    border: 2px;
+    border-radius: 10px;
+    height: 3em;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
 }
