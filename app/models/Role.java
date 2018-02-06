@@ -11,6 +11,10 @@ import java.util.UUID;
 @Table(name = "roles")
 public class Role {
 
+    public Role() {
+
+    }
+
     public Role(String roleName) {
         this.roleName = roleName;
     }
