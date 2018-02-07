@@ -9,9 +9,14 @@ export default Route.extend({
 
     actions: {
         register() {
-            this.get('userService').register()
+            this.get('userService').register(this.get('controller.firstName'),
+                                             this.get('controller.lastName'),
+                                             this.get('controller.email'),
+                                             this.get('controller.phoneNumber'),
+                                             this.get('controller').userType,
+                                             this.get('controller.password'))
             .then(data => {
-                this.transitionTo('login');
+                this.transitionTo('index');
             })
             .catch(error => {
                 alert(error);
@@ -22,7 +27,7 @@ export default Route.extend({
     model() {
         return RSVP.hash({
             //iz baze povuci tipove korisnika
-            userTypes: ["a", "b"]
+            userTypes: ["User", "Seller"]
         })
     }
 });

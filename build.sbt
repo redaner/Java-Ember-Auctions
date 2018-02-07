@@ -15,7 +15,8 @@ scalaVersion := "2.11.11"
 //noinspection Annotator
 libraryDependencies ++= Seq( javaJdbc , cache , javaWs ,
   "org.postgresql" % "postgresql" % "42.1.4", javaJpa,
-  "org.hibernate" % "hibernate-entitymanager" % "5.2.12.Final")
+  "org.hibernate" % "hibernate-entitymanager" % "5.2.12.Final",
+  "org.mindrot" % "jbcrypt" % "0.3m")
 
 libraryDependencies ++= Seq(evolutions, jdbc)
 

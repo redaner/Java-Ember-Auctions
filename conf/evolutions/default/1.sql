@@ -13,10 +13,14 @@ CREATE TABLE Users (
   phoneNumber varchar(50) not null,
   role UUID not null,
   password text not null,
-  foreign key(role) references Roles(id) on delete restrict
+  constraint user_role_fk
+  foreign key (role)
+  REFERENCES Roles(id)
+
 );
 
 # --- !Downs
+
 
 DROP TABLE Users;
 DROP TABLE Roles;
