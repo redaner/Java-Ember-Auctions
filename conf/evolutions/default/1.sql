@@ -13,6 +13,7 @@ CREATE TABLE Users (
   phoneNumber varchar(50) not null,
   role UUID not null,
   password text not null,
+  token text,
   constraint user_role_fk
   foreign key (role)
   REFERENCES Roles(id)

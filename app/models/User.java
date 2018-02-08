@@ -33,6 +33,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "token")
+    private String token;
+
     @ManyToOne
     @JoinColumn(name = "role",
                 foreignKey = @ForeignKey(name = "user_role_fk"))
@@ -105,5 +108,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

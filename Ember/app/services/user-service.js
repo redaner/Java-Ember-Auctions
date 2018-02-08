@@ -45,5 +45,29 @@ export default Service.extend({
                 reject(error);
             })
         })
+    },
+
+    getCurrentUser() {
+        return new Promise((resolve, reject) => {
+            this.get('ajax').request('/v1/getCurrentUser')
+                .then(data => {
+                    resolve(data);
+                })
+                .catch(error => {
+                    reject(error);
+                })  
+        })
+    },
+
+    logOut() {
+        return new Promise((resolve, reject) => {
+            this.get('ajax').request('/v1/logout')
+                .then(data => { 
+                    resolve(data);
+                })
+                .catch(error => {
+                    reject(error);
+                })
+        })
     }
 });
