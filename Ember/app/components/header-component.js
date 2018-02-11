@@ -2,6 +2,8 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
+    tagName: 'nav',
+    classNames: ['navbar', 'navbar-default', 'header-menu'],
     user: null,
     isUser: false,
     isAdmin: false,
@@ -13,8 +15,8 @@ export default Component.extend({
         logout() {
             this.get('userService').logOut()
                 .then(data => {
-                    this.refresh();
                     this.set('user', null);
+                    window.location.reload();
                 })
         }
     }

@@ -4,17 +4,17 @@
 
         </div>
         <div class="col-md-4">
-            <form {{action 'login' on='submit' }}>
+            <form {{action 'login' user  on='submit' }}>
                 <div class="row login-title">
                     <div class="login-title-inner">
                         LOGIN
                     </div>
                 </div>
                 <div class="row row-input">
-                    {{input id="email" type="text" placeholder="Email" class="form-control input-md login-input" value=email}}
+                    {{input id="email" type="text" placeholder="Email" class="form-control input-md login-input" value=user.email}}
                 </div>
                 <div class="row row-input">
-                    {{input id="password" type="password" placeholder="Password" class="form-control input-md login-input" value=password}}
+                    {{input id="password" type="password" placeholder="Password" class="form-control input-md login-input" value=user.password}}
                 </div>
                 <div class="row row-input">
                     {{input id="submit" value="LOG IN" type="submit" placeholder="Login" class="submit-btn form-control input-md login-input" }}

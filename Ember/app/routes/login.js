@@ -5,10 +5,10 @@ export default Route.extend({
     userService: service(),
 
     actions: {
-        login() {
-            this.get('userService').login(this.get('controller.email'), this.get('controller.password'))
+        login(user) {
+            this.get('userService').login(user.email, user.password)
                 .then(data => {
-                    this.transitionTo('index');
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     alert(error);

@@ -11,11 +11,7 @@ import java.util.UUID;
 public class AuthenticationService extends AbstractService {
 
     public String setToken(User user) {
-        String token = UUID.randomUUID().toString();
-        user.setToken(token);
-        getEntityManager().merge(user);
-
-        return token;
+        return user.getId().toString();
     }
 
     public User find(String token) {
@@ -26,7 +22,7 @@ public class AuthenticationService extends AbstractService {
         Root<User> userRoot = criteriaQuery.from(User.class);
 
         criteriaQuery.select(userRoot);
-        criteriaQuery.where(criteriaBuilder.equal(userRoot.get("token"), token));
+        criteriaQuery.where(criteriaBuilder.equal(userRoot.get("id"), UUID.fromString(token)));
 
         try {
             return entityManager.createQuery(criteriaQuery).getSingleResult();

@@ -4,6 +4,10 @@ export default Controller.extend({
 
     userType: null,
 
+    user: {
+
+    },
+
     actions: {
         updateUserType: function(value) {
             this.set('userType', value);

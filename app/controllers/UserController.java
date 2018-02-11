@@ -71,11 +71,11 @@ public class UserController extends BaseController {
             if (user != null) {
                 return ok(Json.toJson(user));
             } else {
-                return badRequest(Json.toJson("User is not logged in."));
+                return unauthorized(Json.toJson("User is not logged in."));
             }
         }
         catch (Exception e) {
-            return badRequest(Json.toJson("User is not logged in."));
+            return unauthorized(Json.toJson("User is not logged in."));
         }
     }
 
@@ -86,7 +86,7 @@ public class UserController extends BaseController {
             return ok(Json.toJson("Successfully logged out!"));
         }
         catch (Exception e) {
-            return badRequest(e.getMessage());
+            return unauthorized();
         }
     }
 }
