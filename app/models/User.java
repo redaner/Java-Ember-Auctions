@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -31,6 +33,7 @@ public class User {
     private String phoneNumber;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @ManyToOne

@@ -43,7 +43,7 @@ public class UserController extends BaseController {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Result login() {
         try {
             Form<LoginForm> loginForm = formFactory.form(LoginForm.class);
@@ -63,7 +63,7 @@ public class UserController extends BaseController {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Result getCurrentUser() {
         try {
             User user = currentUser();
