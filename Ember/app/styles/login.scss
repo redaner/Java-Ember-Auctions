@@ -7,12 +7,12 @@
 }
 
 .submit-btn {
-    background-color: #332e2e;
+    background-color: $dark_grey;
     color: white;
 }
 
 .submit-btn:hover {
-    background-color: #635959;
+    background-color: $login_hover_grey;
 }
 
 .login-container {
@@ -20,11 +20,10 @@
 }
 
 body {
-    background-color: #e9e0e0;
+    background-color: $background_color;
 }
 
 .login-title{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     align-content: center;
     align-items: center;
 }
@@ -44,5 +43,5 @@ body {
     border: 2px;
     border-radius: 10px;
     height: 3em;
-    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    font-family: $font_thin;
 }

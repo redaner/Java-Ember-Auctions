@@ -7,6 +7,11 @@ export default Route.extend({
 
     model() {
         return RSVP.hash({
+            /**
+             * Method calls user-service method which gets current user,
+             * used for dynamically updating frontend
+             * based on which user is logged in.
+             */
             currentUser: this.get('userService').getCurrentUser()
                              .then(data => {    
                                  return data;

@@ -1,4 +1,13 @@
 $dark_grey: #332e2e;
+$login_hover_grey: #635959;
+$background_color: #e9e0e0;
+
+$font: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+$font_thin: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+
+* {
+    font-family: $font;
+}
 
 @import "ember-bootstrap/bootstrap";
 

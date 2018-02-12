@@ -1,7 +1,4 @@
-$font: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
 .menu-item {
-    font-family: $font;
     font-size: 1.3em; 
     color: white;
     padding: 1em;   
@@ -20,7 +17,6 @@ $font: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 .header-menu {
     background-color: $dark_grey;
-    font-family: "Roboto";
 }
 
 .app-title {

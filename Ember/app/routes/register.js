@@ -6,13 +6,15 @@ export default Route.extend({
     userService: service(),
 
     actions: {
+        /**
+         * Method collects form data and calls user-service method,
+         * used for redirecting the page when user is successfully registered
+         * or displaying errors.
+         * @param {user} user 
+         */
         register(user) {
-            this.get('userService').register(user.firstName,
-                                             user.lastName,
-                                             user.email,
-                                             user.phoneNumber,
-                                             this.get('controller').userType,
-                                             user.password)
+            this.get('userService').register(user,
+                                             this.get('controller').userType)
             .then(data => {
                 window.location.href = '/';
             })
@@ -22,6 +24,9 @@ export default Route.extend({
         }
     },
 
+    /**
+     * Register model.
+     */
     model() {
         return RSVP.hash({
             userTypes: ["User", "Seller"]

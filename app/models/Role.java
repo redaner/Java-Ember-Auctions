@@ -11,34 +11,47 @@ import java.util.UUID;
 @Table(name = "roles")
 public class Role {
 
-    public Role() {
-
-    }
-
-    public Role(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
     @Id
     @GeneratedValue
     private UUID id;
 
     @Column(name = "rolename")
     private String roleName;
+
+    public Role() {
+
+    }
+
+    /**
+     * Gets id
+     *
+     * @return value of id
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /**
+     * sets id to parameter value
+     */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets roleName
+     *
+     * @return value of roleName
+     */
+    public String getRoleName() {
+        return roleName;
+    }
+
+    /**
+     * sets roleName to parameter value
+     */
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
 }

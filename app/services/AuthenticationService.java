@@ -10,10 +10,22 @@ import java.util.UUID;
 
 public class AuthenticationService extends AbstractService {
 
+    /**
+     * Method gets user id which is used as
+     * a token in the current session.
+     * @param user
+     * @return user id
+     */
     public String setToken(User user) {
         return user.getId().toString();
     }
 
+    /**
+     * Method finds the user with given id in the database,
+     * used for authenticating and returning current user.
+     * @param token
+     * @return
+     */
     public User find(String token) {
         EntityManager entityManager = getEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -26,8 +38,7 @@ public class AuthenticationService extends AbstractService {
 
         try {
             return entityManager.createQuery(criteriaQuery).getSingleResult();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

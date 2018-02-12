@@ -1,6 +1,101 @@
 package forms;
 
 public class RegisterForm {
+    /**
+     * Gets firstName
+     *
+     * @return value of firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * sets firstName to parameter value
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Gets lastName
+     *
+     * @return value of lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * sets lastName to parameter value
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return value of email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * sets email to parameter value
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets phoneNumber
+     *
+     * @return value of phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * sets phoneNumber to parameter value
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Gets userType
+     *
+     * @return value of userType
+     */
+    public String getUserType() {
+        return userType;
+    }
+
+    /**
+     * sets userType to parameter value
+     */
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return value of password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * sets password to parameter value
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     private String firstName;
     private String lastName;
@@ -9,53 +104,6 @@ public class RegisterForm {
     private String userType;
     private String password;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public RegisterForm(String firstName, String lastName, String email, String phoneNumber, String userType, String password) {
         this.firstName = firstName;
@@ -66,7 +114,7 @@ public class RegisterForm {
         this.password = password;
     }
 
-    public RegisterForm () {
+    public RegisterForm() {
 
     }
 

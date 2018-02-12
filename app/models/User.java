@@ -15,7 +15,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue
     private UUID id;
@@ -37,9 +36,122 @@ public class User {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role",
-                foreignKey = @ForeignKey(name = "user_role_fk"))
+    @JoinColumn(name = "role")
     private Role role;
+
+
+    /**
+     * Gets id
+     *
+     * @return value of id
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /**
+     * sets id to parameter value
+     */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets firstName
+     *
+     * @return value of firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * sets firstName to parameter value
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Gets lastName
+     *
+     * @return value of lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * sets lastName to parameter value
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return value of email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * sets email to parameter value
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets phoneNumber
+     *
+     * @return value of phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * sets phoneNumber to parameter value
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return value of password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * sets password to parameter value
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Gets role
+     *
+     * @return value of role
+     */
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * sets role to parameter value
+     */
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 
     public User() {
 
@@ -54,59 +166,4 @@ public class User {
         this.role = role;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

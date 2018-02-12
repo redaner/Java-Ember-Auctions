@@ -13,10 +13,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 public class UserService extends AbstractService {
-    public UserService () {
+    public UserService() {
 
     }
 
+    /**
+     * Method used for inserting a new row in the
+     * database, so the registered user can log in
+     * anytime in the future.
+     * @param registerForm
+     * @return user
+     */
     public User register(RegisterForm registerForm) {
         EntityManager entityManager = getEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -36,6 +43,13 @@ public class UserService extends AbstractService {
         return user;
     }
 
+    /**
+     * Method used for checking if user from request exists
+     * in the context, and if the correct password was sent.
+     *
+     * @param loginForm
+     * @return user
+     */
     public User login(LoginForm loginForm) {
         EntityManager entityManager = getEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -51,13 +65,11 @@ public class UserService extends AbstractService {
 
             if (BCrypt.checkpw(loginForm.getPassword(), user.getPassword())) {
                 return user;
-            }
-            else {
+            } else {
                 //EXCEPTIONS
                 return null;
             }
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             //EXCEPTIONS
             return null;
         }
