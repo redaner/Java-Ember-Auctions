@@ -7,6 +7,10 @@ export default Route.extend({
 
 	model () {
 		return RSVP.hash({
+			/**
+			 * OK message, used to check if communication between
+			 * frontend and backend is established.
+			 */
 			okMessage: this.get('ajax').request('/v1/health')
 		})
 	}

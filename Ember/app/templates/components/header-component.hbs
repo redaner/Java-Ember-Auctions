@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="navbar-header app-title-container">
+    {{#link-to "index"}}<b class="app-title">AUCTIONS</b>{{/link-to}}
+  </div>
+  <ul class="nav navbar-nav menu-items">
+
+    <li>{{#link-to "index"}}<b class="menu-item">HOME</b>{{/link-to}}</li>
+
+    {{#if user}}
+
+      <li><a href="{{lowercase-helper user.role.roleName}}"><b class="menu-item">{{uppercase-helper user.role.roleName}}</b></a></li>
+
+      <li>{{#link-to "login"}}<b class="menu-item" {{action 'logout'}}>LOGOUT</b>{{/link-to}}</li>
+
+    {{else}}
+
+      <li>{{#link-to "login"}}<b class="menu-item">LOGIN</b>{{/link-to}}</li>
+
+    {{/if}}
+  </ul>
+</div>

@@ -1,0 +1,23 @@
+.footer {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    height: 4em;
+    background-color: $dark_grey;
+}
+
+.list-inline-item{
+    color:white;
+    font-size: 17px;
+    padding-top: 4px;
+}
+
+.list-inline {
+    margin: 1em;
+}
+
+.copyright-notice {
+    float: right;
+    font-size: 15px;
+}
+

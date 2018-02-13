@@ -1,0 +1,30 @@
+.menu-item {
+    font-size: 1.3em; 
+    color: white;
+    padding: 1em;   
+}
+
+.menu-item:hover {
+    border-bottom: 2px solid white;
+}
+
+.menu-items {
+    float: right;
+    padding: 1em;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.header-menu {
+    background-color: $dark_grey;
+}
+
+.app-title {
+    color: white;
+    font-family: $font;
+    font-size: 1.4em;
+}
+
+.app-title-container {
+    padding: 2em;
+}
