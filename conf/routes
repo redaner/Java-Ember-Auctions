@@ -14,6 +14,9 @@ GET     /api/v1/getCurrentUser                 controllers.UserController.getCur
 
 GET     /api/v1/logout                         controllers.UserController.logout
 
+# Product handling
+GET     /api/v1/getAllProducts                 controllers.ProductController.getAllProducts
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                                 controllers.Assets.versioned(path="/public/assets", file: Asset)
 GET     /fonts/*file                                  controllers.Assets.versioned(path="/public/fonts", file: Asset)

@@ -17,6 +17,10 @@
 
 .header-menu {
     background-color: $dark_grey;
+    position: fixed;
+    width: 100%;
+    display: inline-block;
+    z-index: 1000;
 }
 
 .app-title {
