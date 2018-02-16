@@ -1,7 +1,6 @@
 package controllers;
 
 import forms.FilterForm;
-import forms.LoginForm;
 import helpers.ProductFilter;
 import models.Product;
 import play.data.Form;
@@ -35,10 +34,11 @@ public class ProductController extends BaseController {
             Form<FilterForm> filterForm = formFactory.form(FilterForm.class);
             List<Product> allProducts = productService.getAllProducts(
                     ProductFilter.createFilter(filterForm.bindFromRequest().get()));
-
             return ok(Json.toJson(allProducts));
         } catch (Exception e) {
             return badRequest("Can't return all products!");
         }
     }
+
+
 }

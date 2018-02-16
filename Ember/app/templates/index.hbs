@@ -8,41 +8,19 @@
         </h1>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
+        {{#each model.products as |product|}}
+            <div class="col-md-4">
+                {{product-component product=product}}
+            </div>
+        {{/each}}
     </div>
     <div class="row">
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-        <div class="col-md-4">
-            {{product-component}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="pagination">
-
+        <div class="pagination col-md-12">
+            {{#each (pagination-array (division-helper model.products.length)) as page}}
+                <button class="pagination-button" {{action "switchPage" page}}>
+                    {{page}}
+                </button>
+            {{/each}}
         </div>
     </div>
     <div class="row">

@@ -24,7 +24,10 @@ public class ProductService extends AbstractService {
         criteriaQuery.select(productRoot);
 
         try {
-            return entityManager.createQuery(criteriaQuery).getResultList();
+            return entityManager.createQuery(criteriaQuery)
+                    .setFirstResult((productFilter.page - 1) * productFilter.numberOfProducts)
+                    .setMaxResults(productFilter.numberOfProducts)
+                    .getResultList();
         } catch (Exception e) {
             return null;
         }
