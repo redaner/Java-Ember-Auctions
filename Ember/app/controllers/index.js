@@ -5,5 +5,12 @@ export default Controller.extend({
         page: 'page'
     },
 
-    page: 1
+    page: 1,
+
+    actions: {
+        switchPage(page) {
+            this.set('page', page);
+            window.scrollTo(0, 0);
+        }
+    }
 });
