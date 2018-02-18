@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /api/v1/health                         controllers.Application.index
+#   GET     /api/v1/health                         controllers.Application.index
 
 # User handling
 POST    /api/v1/register                       controllers.UserController.register
@@ -13,5 +13,11 @@ POST    /api/v1/login                          controllers.UserController.login
 GET     /api/v1/getCurrentUser                 controllers.UserController.getCurrentUser
 
 GET     /api/v1/logout                         controllers.UserController.logout
+
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                          controllers.Assets.at(path="/public", file)
+GET     /assets/*file                                 controllers.Assets.versioned(path="/public/assets", file: Asset)
+GET     /fonts/*file                                  controllers.Assets.versioned(path="/public/fonts", file: Asset)
+GET     /images/*file                                 controllers.Assets.at(path="/public/images", file)
+
+GET     /                                             controllers.Application.index(slug = "")
+GET     /*slug                                        controllers.Application.index(slug)

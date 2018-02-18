@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/auctions -Dhttp.port=${PORT} -Dplay.evolutions.db.default.autoApply=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} -Ddb.default.user=${DATABASE_USER} -Ddb.default.password=${DATABASE_PASSWORD}

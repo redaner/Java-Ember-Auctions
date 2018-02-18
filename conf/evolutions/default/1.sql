@@ -1,5 +1,9 @@
 # --- !Ups
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREaTE EXTENSION IF NOT EXISTS postgis;
+
 CREATE TABLE Roles (
   id UUID primary key default uuid_generate_v1(),
   roleName varchar(255) not null
