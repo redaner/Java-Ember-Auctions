@@ -18,8 +18,10 @@ libraryDependencies ++= Seq( javaJdbc , cache , javaWs ,
   "org.hibernate" % "hibernate-entitymanager" % "5.2.12.Final",
   "org.mindrot" % "jbcrypt" % "0.3m")
 
-libraryDependencies ++= Seq(evolutions, jdbc)
+libraryDependencies += evolutions
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
+
+PlayKeys.externalizeResources := false
 
       

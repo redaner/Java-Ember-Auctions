@@ -11,7 +11,7 @@ export default Route.extend({
 			 * OK message, used to check if communication between
 			 * frontend and backend is established.
 			 */
-			okMessage: this.get('ajax').request('/v1/health')
+		//	okMessage: this.get('ajax').request('/v1/health')
 		})
 	}
 });
