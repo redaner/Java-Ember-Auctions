@@ -32,4 +32,22 @@ public class ProductService extends AbstractService {
             return null;
         }
     }
+
+    public Integer getNumberOfProducts() {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Product> criteriaQuery = criteriaBuilder.createQuery(Product.class);
+        Root<Product> productRoot = criteriaQuery.from(Product.class);
+
+        criteriaQuery.select(productRoot);
+
+        try {
+            return entityManager.createQuery(criteriaQuery).getResultList().size();
+        } catch (Exception e) {
+            return null;
+        }
+
+
+    }
 }

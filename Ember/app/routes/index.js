@@ -26,6 +26,14 @@ export default Route.extend({
 				})
 				.catch(error => {
 					return null;
+				}),
+
+			numberOfProducts: this.get('productService').getNumberOfProducts()
+				.then(data => {
+					return data;
+				})
+				.catch(error => {
+					return null;
 				})
 		})
 	}

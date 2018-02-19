@@ -28,7 +28,7 @@ public class ProductController extends BaseController {
         this.formFactory = formFactory;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Result getAllProducts() {
         try {
             Form<FilterForm> filterForm = formFactory.form(FilterForm.class);
@@ -37,6 +37,15 @@ public class ProductController extends BaseController {
             return ok(Json.toJson(allProducts));
         } catch (Exception e) {
             return badRequest("Can't return all products!");
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Result getNumberOfProducts() {
+        try {
+            return ok(Json.toJson(productService.getNumberOfProducts()));
+        } catch (Exception e) {
+            return badRequest("Bad request!");
         }
     }
 

@@ -14,5 +14,9 @@ export default Service.extend({
                 numberOfProducts
             }
         });
+    },
+
+    getNumberOfProducts() {
+        return this.get('ajax').request('/v1/getNumberOfProducts');
     }
 });
