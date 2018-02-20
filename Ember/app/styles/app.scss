@@ -14,7 +14,11 @@ $font_thin: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     padding-bottom: 80px;
 }
 
-@import "ember-bootstrap/bootstrap";
+
+@import "ember-cli-bootstrap-4/bootstrap";
+
+
+//@import "ember-bootstrap/bootstrap";
 
 @import "header-component";
 
@@ -27,3 +31,7 @@ $font_thin: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
 @import "product-component";
 
 @import "index";
+
+@import "rating-component";
+
+@import "categories-component";

@@ -2,6 +2,7 @@ package services;
 
 import helpers.ProductFilter;
 import models.Product;
+import models.Subcategory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,6 +23,17 @@ public class ProductService extends AbstractService {
         Root<Product> productRoot = criteriaQuery.from(Product.class);
 
         criteriaQuery.select(productRoot);
+
+        if (productFilter.sortBy.equals("rating")) {
+            criteriaQuery.orderBy(criteriaBuilder.desc(productRoot.get(productFilter.sortBy)));
+        } else if (productFilter.sortBy.equals("price")) {
+            criteriaQuery.orderBy(criteriaBuilder.asc(productRoot.get(productFilter.sortBy)));
+        }
+
+        criteriaQuery.where(criteriaBuilder.between(productRoot.get("price"), productFilter.priceLower, productFilter.priceUpper)
+                , criteriaBuilder.like(criteriaBuilder.lower(productRoot.get("name")), '%' + productFilter.searchQuery.toLowerCase() + '%')
+                , criteriaBuilder.greaterThanOrEqualTo(productRoot.get("rating"), productFilter.rating));
+
 
         try {
             return entityManager.createQuery(criteriaQuery)
@@ -44,6 +56,22 @@ public class ProductService extends AbstractService {
 
         try {
             return entityManager.createQuery(criteriaQuery).getResultList().size();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Subcategory> getAllCategories() {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Subcategory> criteriaQuery = criteriaBuilder.createQuery(Subcategory.class);
+        Root<Subcategory> subcategoryRoot = criteriaQuery.from(Subcategory.class);
+
+        criteriaQuery.select(subcategoryRoot);
+
+        try {
+            return entityManager.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
             return null;
         }

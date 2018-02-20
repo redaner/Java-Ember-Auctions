@@ -9,6 +9,24 @@ export default Route.extend({
 	queryParams: {
 		page: {
 			refreshModel: true
+		},
+		priceLower: {
+			refreshModel: true
+		},
+		priceUpper: {
+			refreshModel: true
+		},
+		rating: {
+			refreshModel: true
+		},
+		searchQuery: {
+			refreshModel: true
+		},
+		sortBy: {
+			refreshModel: true
+		},
+		categories: {
+			refreshModel: true
 		}
 	},
 
@@ -18,9 +36,17 @@ export default Route.extend({
 			 * OK message, used to check if communication between
 			 * frontend and backend is established.
 			 */
-		//	okMessage: this.get('ajax').request('/v1/health')
+			//	okMessage: this.get('ajax').request('/v1/health')
 
-			products: this.get('productService').getAllProducts(params.page, 9)
+			products: this.get('productService').getAllProducts(params.page,
+				9,
+				params.priceLower,
+				params.priceUpper,
+				params.rating,
+				params.searchQuery,
+				params.sortBy,
+				params.categories.length != 0 ? params.categories.split('-') : new Array()
+			)
 				.then(data => {
 					return data;
 				})
@@ -29,6 +55,14 @@ export default Route.extend({
 				}),
 
 			numberOfProducts: this.get('productService').getNumberOfProducts()
+				.then(data => {
+					return data;
+				})
+				.catch(error => {
+					return null;
+				}),
+
+			allCategories: this.get('productService').getAllCategories()
 				.then(data => {
 					return data;
 				})

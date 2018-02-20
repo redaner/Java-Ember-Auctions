@@ -49,5 +49,14 @@ public class ProductController extends BaseController {
         }
     }
 
+    @Transactional(readOnly = true)
+    public Result getAllCategories() {
+        try {
+            return ok(Json.toJson(productService.getAllCategories()));
+        } catch (Exception e) {
+            return badRequest("Bad request!");
+        }
+
+    }
 
 }
