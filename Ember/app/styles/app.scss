@@ -9,7 +9,16 @@ $font_thin: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     font-family: $font;
 }
 
-@import "ember-bootstrap/bootstrap";
+.appBody {
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+
+
+@import "ember-cli-bootstrap-4/bootstrap";
+
+
+//@import "ember-bootstrap/bootstrap";
 
 @import "header-component";
 
@@ -18,3 +27,11 @@ $font_thin: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
 @import "login";
 
 @import "register";
+
+@import "product-component";
+
+@import "index";
+
+@import "rating-component";
+
+@import "categories-component";

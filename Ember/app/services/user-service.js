@@ -58,5 +58,9 @@ export default Service.extend({
      */
     logOut() {
         return this.get('ajax').request('/v1/logout');
+    },
+
+    getAllSellers() {
+        return this.get('ajax').request('/v1/getAllSellers');
     }
 });

@@ -124,4 +124,13 @@ public class UserController extends BaseController {
             return unauthorized("Logout failed!");
         }
     }
+
+    @Transactional(readOnly = true)
+    public Result getAllSellers() {
+        try {
+            return ok(Json.toJson(userService.getAllSellers()));
+        } catch (Exception e) {
+            return badRequest("Can't return all sellers!");
+        }
+    }
 }

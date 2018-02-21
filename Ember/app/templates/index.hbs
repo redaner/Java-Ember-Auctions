@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row search-row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6 padding-0">
+                    {{input type=text class="search-input" value=query}}
+                </div>
+                <div class="col-md-2 padding-0">
+                    <div class="dropdown sortby">
+                        <button class="btn dropdown-toggle sortby-button" type="button" data-toggle="dropdown">Sort by
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu sort-menu">
+                            <li class="filter-radiobutton">
+                                {{input type="radio" name="sortBy" id="byPrice" click=(action "sortBy" 'price' '#byPrice')}}
+                                <label for="byPrice">Price</label>
+                            </li>
+                            <li class="filter-radiobutton">
+                                {{input type="radio" name="sortBy" id="byRating" click=(action "sortBy" 'rating' '#byRating')}}
+                                <label for="byRating">Rating</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 padding-0">
+                    <div class="dropdown sortby">
+                        <button class="btn dropdown-toggle sortby-button" type="button" data-toggle="dropdown">Filter by
+                            <span class="caret"></span>
+                        </button>
+                        <div class="dropdown-menu rating-menu">
+                            <div class="rating-filter">
+                                <label class="restaurant-filter-label" for="ratingFilter">Rating</label>
+                                <div class="ratingFilter">
+                                    {{rating-component updateRating="updateRatingFilter"}}
+                                </div>
+                            </div>
+                            <div class="price-filter">
+                                <label class="restaurant-filter-label" for="priceFilter">Price</label>
+                                <div class="priceFilter">
+                                    {{input-range min=0 max=100000 low="0" high="100" onchange=(action 'updatePriceFilter')}}
+                                    <div class="row">
+                                        <div class="price col-md-6">
+                                            $0
+                                        </div>
+                                        <div class="price col-md-6">
+                                            $1000000
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="categories-filter">
+                                <label class="restaurant-filter-label" for="categoryFilter">Category</label>
+                                <div class="categoryFilter">
+                                    {{categories-component categories=model.allCategories update="updateCategoryFilter"}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 padding-0">
+                    <div class="search-button-div">
+                        <button class="btn-success btn-search" {{action "updateSearchQuery"}}>
+                            SEARCH
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="popular-products-title">
+                POPULAR PRODUCTS
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        {{#each model.products as |product|}}
+        <div class="col-md-4">
+            {{product-component product=product}}
+        </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        <div class="pagination col-md-12">
+            {{#each (pagination-array (division-helper model.numberOfProducts)) as |page|}}
+            <button class="pagination-button" {{action "switchPage" page}}>
+                {{page}}
+            </button>
+            {{/each}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="popular-products-title">
+                POPULAR SELLERS
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        {{#each model.allSellers as |seller|}}
+            <div class="col-md-4">
+                <p>
+                    {{seller.firstName}} 
+                    {{seller.lastName}}
+                </p>
+            </div>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="row">
+    {{#each categories as |category|}}
+        <div class="col-md-4">
+            {{#if (contains checkedCategories category.name)}}
+                <span class="checked-category">
+                    {{input type="checkbox" id=category.id change=(action "updateCategories" category.name )}}
+                    <label class="checked-category" for={{category.id}}>{{category.name}}</label>
+                </span>
+            {{else}}
+                {{input type="checkbox" id=category.id change=(action "updateCategories" category.name)}}
+                <label for={{category.id}}>{{category.name}}</label>
+            {{/if}}    
+        </div>
+    {{/each}}
+</div>

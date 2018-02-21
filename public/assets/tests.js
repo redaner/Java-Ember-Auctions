@@ -10,6 +10,11 @@ define('auctions/tests/app.lint-test', [], function () {
     assert.ok(true, 'app.js should pass ESLint\n\n');
   });
 
+  QUnit.test('components/categories-component.js', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/categories-component.js should pass ESLint\n\n6:5 - Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties (ember/avoid-leaking-state-in-ember-objects)\n21:13 - Use closure actions, unless you need bubbling (ember/closure-actions)');
+  });
+
   QUnit.test('components/footer-component.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'components/footer-component.js should pass ESLint\n\n');
@@ -18,6 +23,26 @@ define('auctions/tests/app.lint-test', [], function () {
   QUnit.test('components/header-component.js', function (assert) {
     assert.expect(1);
     assert.ok(false, 'components/header-component.js should pass ESLint\n\n22:23 - \'data\' is defined but never used. (no-unused-vars)');
+  });
+
+  QUnit.test('components/price-component.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/price-component.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('components/product-component.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/product-component.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('components/rating-component.js', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/rating-component.js should pass ESLint\n\n10:17 - Use import { computed } from \'@ember/object\'; instead of using Ember.computed (ember/new-module-imports)\n10:17 - \'Ember\' is not defined. (no-undef)\n26:14 - Use import { computed } from \'@ember/object\'; instead of using Ember.computed (ember/new-module-imports)\n26:14 - \'Ember\' is not defined. (no-undef)\n34:14 - Use import { computed } from \'@ember/object\'; instead of using Ember.computed (ember/new-module-imports)\n34:14 - \'Ember\' is not defined. (no-undef)\n42:16 - Use import { computed } from \'@ember/object\'; instead of using Ember.computed (ember/new-module-imports)\n42:16 - \'Ember\' is not defined. (no-undef)\n50:15 - Use import { computed } from \'@ember/object\'; instead of using Ember.computed (ember/new-module-imports)\n50:15 - \'Ember\' is not defined. (no-undef)\n58:15 - \'Ember\' is not defined. (no-undef)\n58:15 - Use import { computed } from \'@ember/object\'; instead of using Ember.computed (ember/new-module-imports)\n67:9 - Use closure actions, unless you need bubbling (ember/closure-actions)\n85:13 - Unexpected console statement. (no-console)');
+  });
+
+  QUnit.test('controllers/index.js', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'controllers/index.js should pass ESLint\n\n20:5 - Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties (ember/avoid-leaking-state-in-ember-objects)\n31:17 - Use import $ from \'jquery\'; instead of using Ember.$ (ember/new-module-imports)\n31:17 - \'Ember\' is not defined. (no-undef)');
   });
 
   QUnit.test('controllers/login.js', function (assert) {
@@ -30,14 +55,29 @@ define('auctions/tests/app.lint-test', [], function () {
     assert.ok(false, 'controllers/register.js should pass ESLint\n\n7:5 - Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties (ember/avoid-leaking-state-in-ember-objects)');
   });
 
+  QUnit.test('helpers/contains.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'helpers/contains.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('helpers/division-helper.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'helpers/division-helper.js should pass ESLint\n\n');
+  });
+
   QUnit.test('helpers/if-equals.js', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'helpers/if-equals.js should pass ESLint\n\n4:3 - Unexpected console statement. (no-console)');
+    assert.ok(true, 'helpers/if-equals.js should pass ESLint\n\n');
   });
 
   QUnit.test('helpers/lowercase-helper.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'helpers/lowercase-helper.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('helpers/pagination-array.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'helpers/pagination-array.js should pass ESLint\n\n');
   });
 
   QUnit.test('helpers/uppercase-helper.js', function (assert) {
@@ -62,12 +102,12 @@ define('auctions/tests/app.lint-test', [], function () {
 
   QUnit.test('routes/application.js', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'routes/application.js should pass ESLint\n\n19:37 - \'error\' is defined but never used. (no-unused-vars)');
+    assert.ok(false, 'routes/application.js should pass ESLint\n\n21:37 - \'error\' is defined but never used. (no-unused-vars)');
   });
 
   QUnit.test('routes/index.js', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'routes/index.js should pass ESLint\n\n');
+    assert.ok(false, 'routes/index.js should pass ESLint\n\n53:12 - \'error\' is defined but never used. (no-unused-vars)\n61:12 - \'error\' is defined but never used. (no-unused-vars)\n69:12 - \'error\' is defined but never used. (no-unused-vars)\n77:12 - \'error\' is defined but never used. (no-unused-vars)');
   });
 
   QUnit.test('routes/login.js', function (assert) {
@@ -93,6 +133,11 @@ define('auctions/tests/app.lint-test', [], function () {
   QUnit.test('services/ajax.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'services/ajax.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('services/product-service.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'services/product-service.js should pass ESLint\n\n');
   });
 
   QUnit.test('services/user-service.js', function (assert) {
@@ -160,6 +205,35 @@ define('auctions/tests/helpers/start-app', ['exports', 'auctions/app', 'auctions
     });
   }
 });
+define('auctions/tests/integration/components/categories-component-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('categories-component', 'Integration | Component | categories component', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template({
+      "id": "xzPsLiDc",
+      "block": "{\"symbols\":[],\"statements\":[[1,[18,\"categories-component\"],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template({
+      "id": "zu031163",
+      "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"categories-component\",null,null,{\"statements\":[[0,\"      template block text\\n\"]],\"parameters\":[]},null],[0,\"  \"]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
 define('auctions/tests/integration/components/footer-component-test', ['ember-qunit'], function (_emberQunit) {
   'use strict';
 
@@ -218,6 +292,133 @@ define('auctions/tests/integration/components/header-component-test', ['ember-qu
     assert.equal(this.$().text().trim(), 'template block text');
   });
 });
+define('auctions/tests/integration/components/price-component-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('price-component', 'Integration | Component | price component', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template({
+      "id": "l0/g0w7k",
+      "block": "{\"symbols\":[],\"statements\":[[1,[18,\"price-component\"],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template({
+      "id": "X0umWjh6",
+      "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"price-component\",null,null,{\"statements\":[[0,\"      template block text\\n\"]],\"parameters\":[]},null],[0,\"  \"]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('auctions/tests/integration/components/product-component-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('product-component', 'Integration | Component | product component', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template({
+      "id": "Wvytx4F3",
+      "block": "{\"symbols\":[],\"statements\":[[1,[18,\"product-component\"],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template({
+      "id": "u1XCjswA",
+      "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"product-component\",null,null,{\"statements\":[[0,\"      template block text\\n\"]],\"parameters\":[]},null],[0,\"  \"]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('auctions/tests/integration/components/rating-component-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('rating-component', 'Integration | Component | rating component', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template({
+      "id": "5QeI0RTY",
+      "block": "{\"symbols\":[],\"statements\":[[1,[18,\"rating-component\"],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template({
+      "id": "QFK5uJUP",
+      "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"],[4,\"rating-component\",null,null,{\"statements\":[[0,\"      template block text\\n\"]],\"parameters\":[]},null],[0,\"  \"]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('auctions/tests/integration/helpers/contains-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('contains', 'helper:contains', {
+    integration: true
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it renders', function (assert) {
+    this.set('inputValue', '1234');
+
+    this.render(Ember.HTMLBars.template({
+      "id": "oRjBKgb+",
+      "block": "{\"symbols\":[],\"statements\":[[1,[25,\"contains\",[[20,[\"inputValue\"]]],null],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '1234');
+  });
+});
+define('auctions/tests/integration/helpers/division-helper-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('division-helper', 'helper:division-helper', {
+    integration: true
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it renders', function (assert) {
+    this.set('inputValue', '1234');
+
+    this.render(Ember.HTMLBars.template({
+      "id": "lMj5YRFQ",
+      "block": "{\"symbols\":[],\"statements\":[[1,[25,\"division-helper\",[[20,[\"inputValue\"]]],null],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '1234');
+  });
+});
 define('auctions/tests/integration/helpers/if-equals-test', ['ember-qunit'], function (_emberQunit) {
   'use strict';
 
@@ -252,6 +453,26 @@ define('auctions/tests/integration/helpers/lowercase-test', ['ember-qunit'], fun
     this.render(Ember.HTMLBars.template({
       "id": "NEo3QuiU",
       "block": "{\"symbols\":[],\"statements\":[[1,[25,\"lowercase\",[[20,[\"inputValue\"]]],null],false]],\"hasEval\":false}",
+      "meta": {}
+    }));
+
+    assert.equal(this.$().text().trim(), '1234');
+  });
+});
+define('auctions/tests/integration/helpers/pagination-array-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleForComponent)('pagination-array', 'helper:pagination-array', {
+    integration: true
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it renders', function (assert) {
+    this.set('inputValue', '1234');
+
+    this.render(Ember.HTMLBars.template({
+      "id": "mHWfD9CX",
+      "block": "{\"symbols\":[],\"statements\":[[1,[25,\"pagination-array\",[[20,[\"inputValue\"]]],null],false]],\"hasEval\":false}",
       "meta": {}
     }));
 
@@ -305,6 +526,11 @@ define('auctions/tests/tests.lint-test', [], function () {
     assert.ok(true, 'helpers/start-app.js should pass ESLint\n\n');
   });
 
+  QUnit.test('integration/components/categories-component-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/categories-component-test.js should pass ESLint\n\n');
+  });
+
   QUnit.test('integration/components/footer-component-test.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'integration/components/footer-component-test.js should pass ESLint\n\n');
@@ -313,6 +539,31 @@ define('auctions/tests/tests.lint-test', [], function () {
   QUnit.test('integration/components/header-component-test.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'integration/components/header-component-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('integration/components/price-component-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/price-component-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('integration/components/product-component-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/product-component-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('integration/components/rating-component-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/rating-component-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('integration/helpers/contains-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/helpers/contains-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('integration/helpers/division-helper-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/helpers/division-helper-test.js should pass ESLint\n\n');
   });
 
   QUnit.test('integration/helpers/if-equals-test.js', function (assert) {
@@ -325,6 +576,11 @@ define('auctions/tests/tests.lint-test', [], function () {
     assert.ok(true, 'integration/helpers/lowercase-test.js should pass ESLint\n\n');
   });
 
+  QUnit.test('integration/helpers/pagination-array-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/helpers/pagination-array-test.js should pass ESLint\n\n');
+  });
+
   QUnit.test('integration/helpers/uppercase-helper-test.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'integration/helpers/uppercase-helper-test.js should pass ESLint\n\n');
@@ -333,6 +589,11 @@ define('auctions/tests/tests.lint-test', [], function () {
   QUnit.test('test-helper.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('unit/controllers/index-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/index-test.js should pass ESLint\n\n');
   });
 
   QUnit.test('unit/controllers/login-test.js', function (assert) {
@@ -385,9 +646,28 @@ define('auctions/tests/tests.lint-test', [], function () {
     assert.ok(true, 'unit/services/ajax-test.js should pass ESLint\n\n');
   });
 
+  QUnit.test('unit/services/product-service-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/services/product-service-test.js should pass ESLint\n\n');
+  });
+
   QUnit.test('unit/services/user-service-test.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/services/user-service-test.js should pass ESLint\n\n');
+  });
+});
+define('auctions/tests/unit/controllers/index-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleFor)('controller:index', 'Unit | Controller | index', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
   });
 });
 define('auctions/tests/unit/controllers/login-test', ['ember-qunit'], function (_emberQunit) {
@@ -513,6 +793,20 @@ define('auctions/tests/unit/services/ajax-test', ['ember-qunit'], function (_emb
   'use strict';
 
   (0, _emberQunit.moduleFor)('service:ajax', 'Unit | Service | ajax', {
+    // Specify the other units that are required for this test.
+    // needs: ['service:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var service = this.subject();
+    assert.ok(service);
+  });
+});
+define('auctions/tests/unit/services/product-service-test', ['ember-qunit'], function (_emberQunit) {
+  'use strict';
+
+  (0, _emberQunit.moduleFor)('service:product-service', 'Unit | Service | product service', {
     // Specify the other units that are required for this test.
     // needs: ['service:foo']
   });

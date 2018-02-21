@@ -1,7 +1,7 @@
 .menu-item {
     font-size: 1.3em; 
     color: white;
-    padding: 1em;   
+    padding: 1em;  
 }
 
 .menu-item:hover {
@@ -17,6 +17,10 @@
 
 .header-menu {
     background-color: $dark_grey;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    z-index: 1000;
 }
 
 .app-title {

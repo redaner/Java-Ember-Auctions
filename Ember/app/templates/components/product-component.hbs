@@ -1,0 +1,28 @@
+<div class="container-fluid product-component-container">
+    <img class="product-img" src="{{product.imageLink}}" alt="slika">
+    <h3 class="product-title">{{product.name}}</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <h5 class="product-category">
+                {{product.category.name}}
+            </h5>
+        </div>
+        <div class="col-md-6">
+            <h4 class="product-price">
+                ${{product.price}}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="col-md-12">
+            Rating: {{product.rating}}
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn-success bid-button-product">
+                BID NOW
+            </button>
+        </div>
+    </div>
+</div>

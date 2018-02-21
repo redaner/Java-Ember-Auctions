@@ -5,6 +5,8 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
     userService: service(),
 
+    classNames: ['appBody'],
+
     model() {
         return RSVP.hash({
             /**
