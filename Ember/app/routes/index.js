@@ -3,7 +3,7 @@ import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
-	ajax: service(),
+	userService: service(),
 	productService: service(),
 
 	queryParams: {
@@ -45,7 +45,7 @@ export default Route.extend({
 				params.rating,
 				params.searchQuery,
 				params.sortBy,
-				params.categories.length != 0 ? params.categories.split('-') : new Array()
+				params.categories
 			)
 				.then(data => {
 					return data;
@@ -63,6 +63,14 @@ export default Route.extend({
 				}),
 
 			allCategories: this.get('productService').getAllCategories()
+				.then(data => {
+					return data;
+				})
+				.catch(error => {
+					return null;
+				}),
+
+			allSellers: this.get('userService').getAllSellers()
 				.then(data => {
 					return data;
 				})

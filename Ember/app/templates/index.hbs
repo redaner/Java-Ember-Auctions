@@ -97,9 +97,20 @@
         </div>
     </div>
     <div class="row">
-        <h1 class="popular-products-title">
-            POPULAR SELLERS
-        </h1>
+        <div class="col-md-12">
+            <h1 class="popular-products-title">
+                POPULAR SELLERS
+            </h1>
+        </div>
     </div>
-
+    <div class="row">
+        {{#each model.allSellers as |seller|}}
+            <div class="col-md-4">
+                <p>
+                    {{seller.firstName}} 
+                    {{seller.lastName}}
+                </p>
+            </div>
+        {{/each}}
+    </div>
 </div>

@@ -1,15 +1,15 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-    queryParams: {
-        page: 'page',
-        priceLower: 'priceLower',
-        priceUpper: 'priceUpper',
-        rating: 'rating',
-        searchQuery: 'searchQuery',
-        sortBy: 'sortBy',
-        categories: 'categories'
-    },
+    queryParams: [
+        'page',
+        'priceLower',
+        'priceUpper',
+        'rating',
+        'searchQuery',
+        'sortBy',
+        'categories'
+    ],
 
     page: 1,
     priceLower: 0,
@@ -17,7 +17,7 @@ export default Controller.extend({
     rating: 0,
     searchQuery: '',
     sortBy: '',
-    categories: '',
+    categories: [],
 
     actions: {
         switchPage(page) {
@@ -26,11 +26,11 @@ export default Controller.extend({
         },
 
         sortBy(sort, id) {
-            if(this.get('sortBy') == sort) {
+            if (this.get('sortBy') == sort) {
                 this.set('sortBy', '');
                 Ember.$(id).prop('checked', false);
             }
-            else {	
+            else {
                 this.set('sortBy', sort);
             }
         },
@@ -50,20 +50,13 @@ export default Controller.extend({
         },
 
         updateCategoryFilter(category) {
-            let categories = this.get('categories').split('-');
-
+            let categories = this.get('categories');
             if (categories.includes(category)) {
-                categories.splice(categories.indexOf(category), 1);
+                categories.removeObject(category);
             }
             else {
-                categories.push(category);
+                categories.addObject(category);
             }
-
-            categories = categories.join('-');
-            while (categories[0] == '-') {
-                categories = categories.substr(1);
-            }
-            this.set('categories', categories);
         }
     }
 });

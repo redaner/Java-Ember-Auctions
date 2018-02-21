@@ -1,6 +1,5 @@
 package services;
 
-import exceptions.ServiceException;
 import forms.LoginForm;
 import forms.RegisterForm;
 import models.Role;
@@ -11,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 public class UserService extends AbstractService {
     public UserService() {
@@ -73,7 +73,24 @@ public class UserService extends AbstractService {
             //EXCEPTIONS
             return null;
         }
+    }
 
+    public List<User> getAllSellers() {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+
+        Role seller = (Role)entityManager.createQuery("SELECT DISTINCT s FROM Role s WHERE roleName = (:seller)").setParameter("seller", "Seller").getSingleResult();
+
+        criteriaQuery.select(userRoot);
+        criteriaQuery.where(criteriaBuilder.equal(userRoot.get("role"), seller));
+
+        try {
+            return entityManager.createQuery(criteriaQuery).getResultList();
+        } catch (Exception e){
+            return null;
+        }
     }
 }

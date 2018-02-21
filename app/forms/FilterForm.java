@@ -1,5 +1,6 @@
 package forms;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class FilterForm {
@@ -99,7 +100,7 @@ public class FilterForm {
      * @return value of categories
      */
     public List<String> getCategories() {
-        return categories;
+        return this.categories;
     }
 
     /**

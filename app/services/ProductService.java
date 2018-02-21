@@ -7,7 +7,10 @@ import models.Subcategory;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService extends AbstractService {
@@ -22,7 +25,11 @@ public class ProductService extends AbstractService {
         CriteriaQuery<Product> criteriaQuery = criteriaBuilder.createQuery(Product.class);
         Root<Product> productRoot = criteriaQuery.from(Product.class);
 
+
+        List<Subcategory> listOfIds = entityManager.createQuery("SELECT DISTINCT s FROM Subcategory s WHERE name IN (:selectedCategories)").setParameter("selectedCategories", productFilter.categories).getResultList();
+
         criteriaQuery.select(productRoot);
+
 
         if (productFilter.sortBy.equals("rating")) {
             criteriaQuery.orderBy(criteriaBuilder.desc(productRoot.get(productFilter.sortBy)));
@@ -32,7 +39,8 @@ public class ProductService extends AbstractService {
 
         criteriaQuery.where(criteriaBuilder.between(productRoot.get("price"), productFilter.priceLower, productFilter.priceUpper)
                 , criteriaBuilder.like(criteriaBuilder.lower(productRoot.get("name")), '%' + productFilter.searchQuery.toLowerCase() + '%')
-                , criteriaBuilder.greaterThanOrEqualTo(productRoot.get("rating"), productFilter.rating));
+                , criteriaBuilder.greaterThanOrEqualTo(productRoot.get("rating"), productFilter.rating)
+                , listOfIds.isEmpty() ? criteriaBuilder.and() : criteriaBuilder.isTrue(productRoot.get("category").in(listOfIds)));
 
 
         try {
