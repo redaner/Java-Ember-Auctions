@@ -787,6 +787,34 @@ define('auctions/components/bs-tooltip/element', ['exports', 'ember-bootstrap/co
     }
   });
 });
+define('auctions/components/categories-component', ['exports'], function (exports) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.default = Ember.Component.extend({
+        classNames: ['container'],
+
+        checkedCategories: [],
+
+        actions: {
+            updateCategories: function updateCategories(category) {
+                var categories = this.get('checkedCategories');
+
+                if (categories.includes(category)) {
+                    categories.splice(categories.indexOf(category), 1);
+                } else {
+                    categories.push(category);
+                }
+
+                this.set('checkedCategories', categories);
+
+                this.sendAction("update", category);
+            }
+        }
+    });
+});
 define('auctions/components/ember-popper', ['exports', 'ember-popper/components/ember-popper'], function (exports, _emberPopper) {
   'use strict';
 
@@ -843,6 +871,167 @@ define('auctions/components/header-component', ['exports'], function (exports) {
         }
     });
 });
+define('auctions/components/input-range', ['exports', 'input-range/components/input-range'], function (exports, _inputRange) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function () {
+      return _inputRange.default;
+    }
+  });
+  ;
+});
+define('auctions/components/price-component', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Component.extend({});
+});
+define('auctions/components/product-component', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Component.extend({});
+});
+define('auctions/components/rating-component', ['exports'], function (exports) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.default = Ember.Component.extend({
+        one: false,
+        two: false,
+        three: false,
+        four: false,
+        five: false,
+
+        userRating: Ember.computed('one', 'two', 'three', 'four', 'five', function () {
+            if (this.get('five')) {
+                return 5;
+            } else if (this.get('four')) {
+                return 4;
+            } else if (this.get('three')) {
+                return 3;
+            } else if (this.get('two')) {
+                return 2;
+            } else if (this.get('one')) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }),
+
+        starOne: Ember.computed('one', function () {
+            if (this.get('one')) {
+                return "full-star";
+            } else {
+                return "empty-star";
+            }
+        }),
+
+        starTwo: Ember.computed('two', function () {
+            if (this.get('two')) {
+                return "full-star";
+            } else {
+                return "empty-star";
+            }
+        }),
+
+        starThree: Ember.computed('three', function () {
+            if (this.get('three')) {
+                return "full-star";
+            } else {
+                return "empty-star";
+            }
+        }),
+
+        starFour: Ember.computed('four', function () {
+            if (this.get('four')) {
+                return "full-star";
+            } else {
+                return "empty-star";
+            }
+        }),
+
+        starFive: Ember.computed('five', function () {
+            if (this.get('five')) {
+                return "full-star";
+            } else {
+                return "empty-star";
+            }
+        }),
+
+        sendRating: function sendRating() {
+            this.sendAction("updateRating", this.get('userRating'));
+        },
+
+
+        actions: {
+            oneStar: function oneStar() {
+                if (this.get('one')) {
+                    this.set('one', false);
+                    this.set('two', false);
+                    this.set('three', false);
+                    this.set('four', false);
+                    this.set('five', false);
+                } else {
+                    this.set('one', true);
+                    this.set('two', false);
+                    this.set('three', false);
+                    this.set('four', false);
+                    this.set('five', false);
+                }
+                console.log("LALALA");
+                this.sendRating();
+            },
+            twoStar: function twoStar() {
+                this.set('one', true);
+                this.set('two', true);
+                this.set('three', false);
+                this.set('four', false);
+                this.set('five', false);
+
+                this.sendRating();
+            },
+            threeStar: function threeStar() {
+                this.set('one', true);
+                this.set('two', true);
+                this.set('three', true);
+                this.set('four', false);
+                this.set('five', false);
+
+                this.sendRating();
+            },
+            fourStar: function fourStar() {
+                this.set('one', true);
+                this.set('two', true);
+                this.set('three', true);
+                this.set('four', true);
+                this.set('five', false);
+
+                this.sendRating();
+            },
+            fiveStar: function fiveStar() {
+                this.set('one', true);
+                this.set('two', true);
+                this.set('three', true);
+                this.set('four', true);
+                this.set('five', true);
+
+                this.sendRating();
+            }
+        }
+    });
+});
 define('auctions/components/welcome-page', ['exports', 'ember-welcome-page/components/welcome-page'], function (exports, _welcomePage) {
   'use strict';
 
@@ -855,6 +1044,58 @@ define('auctions/components/welcome-page', ['exports', 'ember-welcome-page/compo
       return _welcomePage.default;
     }
   });
+});
+define('auctions/controllers/index', ['exports'], function (exports) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.default = Ember.Controller.extend({
+        queryParams: ['page', 'priceLower', 'priceUpper', 'rating', 'searchQuery', 'sortBy', 'categories'],
+
+        page: 1,
+        priceLower: 0,
+        priceUpper: 100000,
+        rating: 0,
+        searchQuery: '',
+        sortBy: '',
+        categories: [],
+
+        actions: {
+            switchPage: function switchPage(page) {
+                this.set('page', page);
+                window.scrollTo(0, 0);
+            },
+            sortBy: function sortBy(sort, id) {
+                if (this.get('sortBy') == sort) {
+                    this.set('sortBy', '');
+                    Ember.$(id).prop('checked', false);
+                } else {
+                    this.set('sortBy', sort);
+                }
+            },
+            updateSearchQuery: function updateSearchQuery() {
+                this.set('searchQuery', this.get('query') ? this.get('query') : '');
+            },
+            updateRatingFilter: function updateRatingFilter(rating) {
+                this.set('rating', rating);
+            },
+            updatePriceFilter: function updatePriceFilter() {
+                var values = arguments[0].split(',');
+                this.set('priceLower', Math.min(values[0], values[1]));
+                this.set('priceUpper', Math.max(values[0], values[1]));
+            },
+            updateCategoryFilter: function updateCategoryFilter(category) {
+                var categories = this.get('categories');
+                if (categories.includes(category)) {
+                    categories.removeObject(category);
+                } else {
+                    categories.addObject(category);
+                }
+            }
+        }
+    });
 });
 define('auctions/controllers/login', ['exports'], function (exports) {
     'use strict';
@@ -989,6 +1230,32 @@ define('auctions/helpers/cancel-all', ['exports', 'ember-concurrency/-helpers'],
 
   exports.default = Ember.Helper.helper(cancelHelper);
 });
+define('auctions/helpers/contains', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.contains = contains;
+  function contains(params /*, hash*/) {
+    return params[0].includes(params[1]);
+  }
+
+  exports.default = Ember.Helper.helper(contains);
+});
+define('auctions/helpers/division-helper', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.divisionHelper = divisionHelper;
+  function divisionHelper(params /*, hash*/) {
+    return Math.floor(params[0] / 9) + 1;
+  }
+
+  exports.default = Ember.Helper.helper(divisionHelper);
+});
 define('auctions/helpers/eq', ['exports', 'ember-truth-helpers/helpers/equal'], function (exports, _equal) {
   'use strict';
 
@@ -1054,8 +1321,7 @@ define('auctions/helpers/if-equals', ['exports'], function (exports) {
   });
   exports.ifEquals = ifEquals;
   function ifEquals(params /*, hash*/) {
-    console.log(params[0] === params[1]);
-    return params[0] === params[1];
+    return params[0] == params[1];
   }
 
   exports.default = Ember.Helper.helper(ifEquals);
@@ -1212,6 +1478,21 @@ define('auctions/helpers/or', ['exports', 'ember-truth-helpers/helpers/or'], fun
       return _or.or;
     }
   });
+});
+define('auctions/helpers/pagination-array', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.paginationArray = paginationArray;
+  function paginationArray(params /*, hash*/) {
+    return Array.from(Array(params[0]).keys()).map(function (x) {
+      return ++x;
+    });
+  }
+
+  exports.default = Ember.Helper.helper(paginationArray);
 });
 define('auctions/helpers/perform', ['exports', 'ember-concurrency/-helpers'], function (exports, _helpers) {
   'use strict';
@@ -1546,6 +1827,8 @@ define('auctions/routes/application', ['exports'], function (exports) {
     exports.default = Ember.Route.extend({
         userService: Ember.inject.service(),
 
+        classNames: ['appBody'],
+
         model: function model() {
             return Ember.RSVP.hash({
                 /**
@@ -1569,15 +1852,64 @@ define('auctions/routes/index', ['exports'], function (exports) {
 		value: true
 	});
 	exports.default = Ember.Route.extend({
-		ajax: Ember.inject.service(),
+		userService: Ember.inject.service(),
+		productService: Ember.inject.service(),
 
-		model: function model() {
+		queryParams: {
+			page: {
+				refreshModel: true
+			},
+			priceLower: {
+				refreshModel: true
+			},
+			priceUpper: {
+				refreshModel: true
+			},
+			rating: {
+				refreshModel: true
+			},
+			searchQuery: {
+				refreshModel: true
+			},
+			sortBy: {
+				refreshModel: true
+			},
+			categories: {
+				refreshModel: true
+			}
+		},
+
+		model: function model(params) {
 			return Ember.RSVP.hash({
 				/**
      * OK message, used to check if communication between
      * frontend and backend is established.
      */
 				//	okMessage: this.get('ajax').request('/v1/health')
+
+				products: this.get('productService').getAllProducts(params.page, 9, params.priceLower, params.priceUpper, params.rating, params.searchQuery, params.sortBy, params.categories).then(function (data) {
+					return data;
+				}).catch(function (error) {
+					return null;
+				}),
+
+				numberOfProducts: this.get('productService').getNumberOfProducts().then(function (data) {
+					return data;
+				}).catch(function (error) {
+					return null;
+				}),
+
+				allCategories: this.get('productService').getAllCategories().then(function (data) {
+					return data;
+				}).catch(function (error) {
+					return null;
+				}),
+
+				allSellers: this.get('userService').getAllSellers().then(function (data) {
+					return data;
+				}).catch(function (error) {
+					return null;
+				})
 			});
 		}
 	});
@@ -1670,6 +2002,40 @@ define('auctions/services/ajax', ['exports', 'ember-ajax/services/ajax'], functi
 		namespace: '/api'
 	});
 });
+define('auctions/services/product-service', ['exports'], function (exports) {
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.default = Ember.Service.extend({
+        ajax: Ember.inject.service(),
+
+        getAllProducts: function getAllProducts(page, numberOfProducts, priceLower, priceUpper, rating, searchQuery, sortBy, categories) {
+            return this.get('ajax').request('/v1/getAllProducts', {
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: {
+                    page: page,
+                    numberOfProducts: numberOfProducts,
+                    priceLower: priceLower,
+                    priceUpper: priceUpper,
+                    rating: rating,
+                    searchQuery: searchQuery,
+                    sortBy: sortBy,
+                    categories: categories
+                }
+            });
+        },
+        getNumberOfProducts: function getNumberOfProducts() {
+            return this.get('ajax').request('/v1/getNumberOfProducts');
+        },
+        getAllCategories: function getAllCategories() {
+            return this.get('ajax').request('/v1/getAllCategories');
+        }
+    });
+});
 define('auctions/services/user-service', ['exports'], function (exports) {
     'use strict';
 
@@ -1750,6 +2116,9 @@ define('auctions/services/user-service', ['exports'], function (exports) {
          */
         logOut: function logOut() {
             return this.get('ajax').request('/v1/logout');
+        },
+        getAllSellers: function getAllSellers() {
+            return this.get('ajax').request('/v1/getAllSellers');
         }
     });
 });
@@ -1767,7 +2136,15 @@ define("auctions/templates/application", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "FeafBz6A", "block": "{\"symbols\":[],\"statements\":[[1,[25,\"header-component\",null,[[\"user\"],[[20,[\"model\",\"currentUser\"]]]]],false],[0,\"\\n\\n\"],[1,[18,\"outlet\"],false],[0,\"\\n\\n\"],[1,[18,\"footer-component\"],false]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/application.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "EZZwA7wV", "block": "{\"symbols\":[],\"statements\":[[1,[25,\"header-component\",null,[[\"user\"],[[20,[\"model\",\"currentUser\"]]]]],false],[0,\"\\n\\n\"],[6,\"div\"],[9,\"class\",\"appBody\"],[7],[0,\"\\n    \"],[1,[18,\"outlet\"],false],[0,\"\\n\"],[8],[0,\"\\n\\n\"],[1,[18,\"footer-component\"],false]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/application.hbs" } });
+});
+define("auctions/templates/components/categories-component", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "gJsGUiMl", "block": "{\"symbols\":[\"category\"],\"statements\":[[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n\"],[4,\"each\",[[20,[\"categories\"]]],null,{\"statements\":[[0,\"        \"],[6,\"div\"],[9,\"class\",\"col-md-4\"],[7],[0,\"\\n\"],[4,\"if\",[[25,\"contains\",[[20,[\"checkedCategories\"]],[19,1,[\"name\"]]],null]],null,{\"statements\":[[0,\"                \"],[6,\"span\"],[9,\"class\",\"checked-category\"],[7],[0,\"\\n                    \"],[1,[25,\"input\",null,[[\"type\",\"id\",\"change\"],[\"checkbox\",[19,1,[\"id\"]],[25,\"action\",[[19,0,[]],\"updateCategories\",[19,1,[\"name\"]]],null]]]],false],[0,\"\\n                    \"],[6,\"label\"],[9,\"class\",\"checked-category\"],[10,\"for\",[19,1,[\"id\"]],null],[7],[1,[19,1,[\"name\"]],false],[8],[0,\"\\n                \"],[8],[0,\"\\n\"]],\"parameters\":[]},{\"statements\":[[0,\"                \"],[1,[25,\"input\",null,[[\"type\",\"id\",\"change\"],[\"checkbox\",[19,1,[\"id\"]],[25,\"action\",[[19,0,[]],\"updateCategories\",[19,1,[\"name\"]]],null]]]],false],[0,\"\\n                \"],[6,\"label\"],[10,\"for\",[19,1,[\"id\"]],null],[7],[1,[19,1,[\"name\"]],false],[8],[0,\"\\n\"]],\"parameters\":[]}],[0,\"        \"],[8],[0,\"\\n\"]],\"parameters\":[1]},null],[8]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/components/categories-component.hbs" } });
 });
 define('auctions/templates/components/ember-popper', ['exports', 'ember-popper/templates/components/ember-popper'], function (exports, _emberPopper) {
   'use strict';
@@ -1798,13 +2175,37 @@ define("auctions/templates/components/header-component", ["exports"], function (
   });
   exports.default = Ember.HTMLBars.template({ "id": "EXs3UFSi", "block": "{\"symbols\":[],\"statements\":[[6,\"div\"],[9,\"class\",\"container-fluid\"],[7],[0,\"\\n  \"],[6,\"div\"],[9,\"class\",\"navbar-header app-title-container\"],[7],[0,\"\\n    \"],[4,\"link-to\",[\"index\"],null,{\"statements\":[[6,\"b\"],[9,\"class\",\"app-title\"],[7],[0,\"AUCTIONS\"],[8]],\"parameters\":[]},null],[0,\"\\n  \"],[8],[0,\"\\n  \"],[6,\"ul\"],[9,\"class\",\"nav navbar-nav menu-items\"],[7],[0,\"\\n\\n    \"],[6,\"li\"],[7],[4,\"link-to\",[\"index\"],null,{\"statements\":[[6,\"b\"],[9,\"class\",\"menu-item\"],[7],[0,\"HOME\"],[8]],\"parameters\":[]},null],[8],[0,\"\\n\\n\"],[4,\"if\",[[20,[\"user\"]]],null,{\"statements\":[[0,\"\\n      \"],[6,\"li\"],[7],[6,\"a\"],[10,\"href\",[26,[[25,\"lowercase-helper\",[[20,[\"user\",\"role\",\"roleName\"]]],null]]]],[7],[6,\"b\"],[9,\"class\",\"menu-item\"],[7],[1,[25,\"uppercase-helper\",[[20,[\"user\",\"role\",\"roleName\"]]],null],false],[8],[8],[8],[0,\"\\n\\n      \"],[6,\"li\"],[7],[4,\"link-to\",[\"login\"],null,{\"statements\":[[6,\"b\"],[9,\"class\",\"menu-item\"],[3,\"action\",[[19,0,[]],\"logout\"]],[7],[0,\"LOGOUT\"],[8]],\"parameters\":[]},null],[8],[0,\"\\n\\n\"]],\"parameters\":[]},{\"statements\":[[0,\"\\n      \"],[6,\"li\"],[7],[4,\"link-to\",[\"login\"],null,{\"statements\":[[6,\"b\"],[9,\"class\",\"menu-item\"],[7],[0,\"LOGIN\"],[8]],\"parameters\":[]},null],[8],[0,\"\\n\\n\"]],\"parameters\":[]}],[0,\"  \"],[8],[0,\"\\n\"],[8]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/components/header-component.hbs" } });
 });
+define("auctions/templates/components/price-component", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "AjYn1zBZ", "block": "{\"symbols\":[],\"statements\":[[1,[18,\"input-range\"],false]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/components/price-component.hbs" } });
+});
+define("auctions/templates/components/product-component", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "MD0ftlF/", "block": "{\"symbols\":[],\"statements\":[[6,\"div\"],[9,\"class\",\"container-fluid product-component-container\"],[7],[0,\"\\n    \"],[6,\"img\"],[9,\"class\",\"product-img\"],[10,\"src\",[26,[[20,[\"product\",\"imageLink\"]]]]],[9,\"alt\",\"slika\"],[7],[8],[0,\"\\n    \"],[6,\"h3\"],[9,\"class\",\"product-title\"],[7],[1,[20,[\"product\",\"name\"]],false],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-6\"],[7],[0,\"\\n            \"],[6,\"h5\"],[9,\"class\",\"product-category\"],[7],[0,\"\\n                \"],[1,[20,[\"product\",\"category\",\"name\"]],false],[0,\"\\n            \"],[8],[0,\"\\n        \"],[8],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-6\"],[7],[0,\"\\n            \"],[6,\"h4\"],[9,\"class\",\"product-price\"],[7],[0,\"\\n                $\"],[1,[20,[\"product\",\"price\"]],false],[0,\"\\n            \"],[8],[0,\"\\n        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n        \"],[6,\"h3\"],[9,\"class\",\"col-md-12\"],[7],[0,\"\\n            Rating: \"],[1,[20,[\"product\",\"rating\"]],false],[0,\"\\n        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-12\"],[7],[0,\"\\n            \"],[6,\"button\"],[9,\"class\",\"btn-success bid-button-product\"],[7],[0,\"\\n                BID NOW\\n            \"],[8],[0,\"\\n        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n\"],[8]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/components/product-component.hbs" } });
+});
+define("auctions/templates/components/rating-component", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "6ZwjP9Aa", "block": "{\"symbols\":[],\"statements\":[[6,\"i\"],[10,\"class\",[26,[\"fa fa-1x fa-star \",[18,\"starOne\"]]]],[9,\"aria-hidden\",\"true\"],[10,\"onclick\",[25,\"action\",[[19,0,[]],\"oneStar\"],null],null],[7],[8],[0,\" \\n\"],[6,\"i\"],[10,\"class\",[26,[\"fa fa-1x fa-star \",[18,\"starTwo\"]]]],[9,\"aria-hidden\",\"true\"],[10,\"onclick\",[25,\"action\",[[19,0,[]],\"twoStar\"],null],null],[7],[8],[0,\" \\n\"],[6,\"i\"],[10,\"class\",[26,[\"fa fa-1x fa-star \",[18,\"starThree\"]]]],[9,\"aria-hidden\",\"true\"],[10,\"onclick\",[25,\"action\",[[19,0,[]],\"threeStar\"],null],null],[7],[8],[0,\" \\n\"],[6,\"i\"],[10,\"class\",[26,[\"fa fa-1x fa-star \",[18,\"starFour\"]]]],[9,\"aria-hidden\",\"true\"],[10,\"onclick\",[25,\"action\",[[19,0,[]],\"fourStar\"],null],null],[7],[8],[0,\" \\n\"],[6,\"i\"],[10,\"class\",[26,[\"fa fa-1x fa-star \",[18,\"starFive\"]]]],[9,\"aria-hidden\",\"true\"],[10,\"onclick\",[25,\"action\",[[19,0,[]],\"fiveStar\"],null],null],[7],[8]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/components/rating-component.hbs" } });
+});
 define("auctions/templates/index", ["exports"], function (exports) {
   "use strict";
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "N6gGgu4F", "block": "{\"symbols\":[],\"statements\":[],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/index.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "qtg+TmOb", "block": "{\"symbols\":[\"seller\",\"page\",\"product\"],\"statements\":[[6,\"div\"],[9,\"class\",\"container\"],[7],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row search-row\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-2\"],[7],[0,\"\\n\\n        \"],[8],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-8\"],[7],[0,\"\\n            \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n                \"],[6,\"div\"],[9,\"class\",\"col-md-6 padding-0\"],[7],[0,\"\\n                    \"],[1,[25,\"input\",[[25,\"-input-type\",[[20,[\"text\"]]],null]],[[\"type\",\"class\",\"value\"],[[20,[\"text\"]],\"search-input\",[20,[\"query\"]]]]],false],[0,\"\\n                \"],[8],[0,\"\\n                \"],[6,\"div\"],[9,\"class\",\"col-md-2 padding-0\"],[7],[0,\"\\n                    \"],[6,\"div\"],[9,\"class\",\"dropdown sortby\"],[7],[0,\"\\n                        \"],[6,\"button\"],[9,\"class\",\"btn dropdown-toggle sortby-button\"],[9,\"type\",\"button\"],[9,\"data-toggle\",\"dropdown\"],[7],[0,\"Sort by\\n                            \"],[6,\"span\"],[9,\"class\",\"caret\"],[7],[8],[0,\"\\n                        \"],[8],[0,\"\\n                        \"],[6,\"ul\"],[9,\"class\",\"dropdown-menu sort-menu\"],[7],[0,\"\\n                            \"],[6,\"li\"],[9,\"class\",\"filter-radiobutton\"],[7],[0,\"\\n                                \"],[1,[25,\"input\",null,[[\"type\",\"name\",\"id\",\"click\"],[\"radio\",\"sortBy\",\"byPrice\",[25,\"action\",[[19,0,[]],\"sortBy\",\"price\",\"#byPrice\"],null]]]],false],[0,\"\\n                                \"],[6,\"label\"],[9,\"for\",\"byPrice\"],[7],[0,\"Price\"],[8],[0,\"\\n                            \"],[8],[0,\"\\n                            \"],[6,\"li\"],[9,\"class\",\"filter-radiobutton\"],[7],[0,\"\\n                                \"],[1,[25,\"input\",null,[[\"type\",\"name\",\"id\",\"click\"],[\"radio\",\"sortBy\",\"byRating\",[25,\"action\",[[19,0,[]],\"sortBy\",\"rating\",\"#byRating\"],null]]]],false],[0,\"\\n                                \"],[6,\"label\"],[9,\"for\",\"byRating\"],[7],[0,\"Rating\"],[8],[0,\"\\n                            \"],[8],[0,\"\\n                        \"],[8],[0,\"\\n                    \"],[8],[0,\"\\n                \"],[8],[0,\"\\n                \"],[6,\"div\"],[9,\"class\",\"col-md-2 padding-0\"],[7],[0,\"\\n                    \"],[6,\"div\"],[9,\"class\",\"dropdown sortby\"],[7],[0,\"\\n                        \"],[6,\"button\"],[9,\"class\",\"btn dropdown-toggle sortby-button\"],[9,\"type\",\"button\"],[9,\"data-toggle\",\"dropdown\"],[7],[0,\"Filter by\\n                            \"],[6,\"span\"],[9,\"class\",\"caret\"],[7],[8],[0,\"\\n                        \"],[8],[0,\"\\n                        \"],[6,\"div\"],[9,\"class\",\"dropdown-menu rating-menu\"],[7],[0,\"\\n                            \"],[6,\"div\"],[9,\"class\",\"rating-filter\"],[7],[0,\"\\n                                \"],[6,\"label\"],[9,\"class\",\"restaurant-filter-label\"],[9,\"for\",\"ratingFilter\"],[7],[0,\"Rating\"],[8],[0,\"\\n                                \"],[6,\"div\"],[9,\"class\",\"ratingFilter\"],[7],[0,\"\\n                                    \"],[1,[25,\"rating-component\",null,[[\"updateRating\"],[\"updateRatingFilter\"]]],false],[0,\"\\n                                \"],[8],[0,\"\\n                            \"],[8],[0,\"\\n                            \"],[6,\"div\"],[9,\"class\",\"price-filter\"],[7],[0,\"\\n                                \"],[6,\"label\"],[9,\"class\",\"restaurant-filter-label\"],[9,\"for\",\"priceFilter\"],[7],[0,\"Price\"],[8],[0,\"\\n                                \"],[6,\"div\"],[9,\"class\",\"priceFilter\"],[7],[0,\"\\n                                    \"],[1,[25,\"input-range\",null,[[\"min\",\"max\",\"low\",\"high\",\"onchange\"],[0,100000,\"0\",\"100\",[25,\"action\",[[19,0,[]],\"updatePriceFilter\"],null]]]],false],[0,\"\\n                                    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n                                        \"],[6,\"div\"],[9,\"class\",\"price col-md-6\"],[7],[0,\"\\n                                            $0\\n                                        \"],[8],[0,\"\\n                                        \"],[6,\"div\"],[9,\"class\",\"price col-md-6\"],[7],[0,\"\\n                                            $1000000\\n                                        \"],[8],[0,\"\\n                                    \"],[8],[0,\"\\n                                \"],[8],[0,\"\\n                            \"],[8],[0,\"\\n                            \"],[6,\"div\"],[9,\"class\",\"categories-filter\"],[7],[0,\"\\n                                \"],[6,\"label\"],[9,\"class\",\"restaurant-filter-label\"],[9,\"for\",\"categoryFilter\"],[7],[0,\"Category\"],[8],[0,\"\\n                                \"],[6,\"div\"],[9,\"class\",\"categoryFilter\"],[7],[0,\"\\n                                    \"],[1,[25,\"categories-component\",null,[[\"categories\",\"update\"],[[20,[\"model\",\"allCategories\"]],\"updateCategoryFilter\"]]],false],[0,\"\\n                                \"],[8],[0,\"\\n                            \"],[8],[0,\"\\n                        \"],[8],[0,\"\\n                    \"],[8],[0,\"\\n                \"],[8],[0,\"\\n                \"],[6,\"div\"],[9,\"class\",\"col-md-2 padding-0\"],[7],[0,\"\\n                    \"],[6,\"div\"],[9,\"class\",\"search-button-div\"],[7],[0,\"\\n                        \"],[6,\"button\"],[9,\"class\",\"btn-success btn-search\"],[3,\"action\",[[19,0,[]],\"updateSearchQuery\"]],[7],[0,\"\\n                            SEARCH\\n                        \"],[8],[0,\"\\n                    \"],[8],[0,\"\\n                \"],[8],[0,\"\\n            \"],[8],[0,\"\\n        \"],[8],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-2\"],[7],[0,\"\\n\\n        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-12\"],[7],[0,\"\\n            \"],[6,\"h1\"],[9,\"class\",\"popular-products-title\"],[7],[0,\"\\n                POPULAR PRODUCTS\\n            \"],[8],[0,\"\\n        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n\"],[4,\"each\",[[20,[\"model\",\"products\"]]],null,{\"statements\":[[0,\"        \"],[6,\"div\"],[9,\"class\",\"col-md-4\"],[7],[0,\"\\n            \"],[1,[25,\"product-component\",null,[[\"product\"],[[19,3,[]]]]],false],[0,\"\\n        \"],[8],[0,\"\\n\"]],\"parameters\":[3]},null],[0,\"    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"pagination col-md-12\"],[7],[0,\"\\n\"],[4,\"each\",[[25,\"pagination-array\",[[25,\"division-helper\",[[20,[\"model\",\"numberOfProducts\"]]],null]],null]],null,{\"statements\":[[0,\"            \"],[6,\"button\"],[9,\"class\",\"pagination-button\"],[3,\"action\",[[19,0,[]],\"switchPage\",[19,2,[]]]],[7],[0,\"\\n                \"],[1,[19,2,[]],false],[0,\"\\n            \"],[8],[0,\"\\n\"]],\"parameters\":[2]},null],[0,\"        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-12\"],[7],[0,\"\\n            \"],[6,\"h1\"],[9,\"class\",\"popular-products-title\"],[7],[0,\"\\n                POPULAR SELLERS\\n            \"],[8],[0,\"\\n        \"],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n\"],[4,\"each\",[[20,[\"model\",\"allSellers\"]]],null,{\"statements\":[[0,\"            \"],[6,\"div\"],[9,\"class\",\"col-md-4\"],[7],[0,\"\\n                \"],[6,\"p\"],[7],[0,\"\\n                    \"],[1,[19,1,[\"firstName\"]],false],[0,\" \\n                    \"],[1,[19,1,[\"lastName\"]],false],[0,\"\\n                \"],[8],[0,\"\\n            \"],[8],[0,\"\\n\"]],\"parameters\":[1]},null],[0,\"    \"],[8],[0,\"\\n\"],[8]],\"hasEval\":false}", "meta": { "moduleName": "auctions/templates/index.hbs" } });
 });
 define("auctions/templates/login", ["exports"], function (exports) {
   "use strict";
@@ -1860,6 +2261,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("auctions/app")["default"].create({"name":"auctions","version":"0.0.0+15a71fc3"});
+  require("auctions/app")["default"].create({"name":"auctions","version":"0.0.0+0b0a124b"});
 }
 //# sourceMappingURL=auctions.map
